@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { GraphQLClient, gql } from 'graphql'
+import { GraphQLClient, gql } from 'graphql-request'
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHQL_API
 
@@ -9,23 +9,25 @@ type Data = {
   name: string
 }
 
-export default function comments(
+export default async function comments(
+
+  
+
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const graphQLClient = new GraphQLClient(graphqlAPI, {
+
+  const {name,email,slug,comment} = req.body;
+  const graphQLClient = new GraphQLClient((graphqlAPI), {
     headers: {
       authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
-    }
-  })
+    },
+  });
 
   const query = gql`
-    mutation CreateComment{$name: String!, $email: String!, $comment: String!, $slug: String!}
-    createComment(
+    mutation CreateComment($name: String!, $email: String!, $comment: String!, $slug: String!) {
+      createComment(data: {name: $name, email: $email, comment: $comment, post: {connect: {slug: $slug}}}){id}
+    }
   `
-
-
-
-
-  res.status(200).json({ name: 'John Doe' })
+  const result = graphQLClient.request(query, req.body)
 }
