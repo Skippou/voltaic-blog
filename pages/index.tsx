@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Key } from 'react'
 
-import { Categories , PostCard , PostWidget} from '../components'
+import { Categories , PostCard , PostWidget, FeaturedPosts} from '../components'
 
 import { getPosts } from '../services'
 
@@ -21,6 +21,10 @@ const Home: NextPage<{posts: any}> = ({ posts }) => {
         <title>Voltaic Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <div>
+        <FeaturedPosts />
+      </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'> 
         <div className='lg:col-span-8 col-span-1'>
