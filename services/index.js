@@ -1,7 +1,7 @@
 import { graphql } from "graphql";
 import { request, gql } from "graphql-request";
 
-const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHQL_API; 
+const graphqlAPI = String(process.env.NEXT_PUBLIC_GRAPHQL_API); 
 
 export const getPosts = async () => {
     const query = gql`
@@ -180,3 +180,40 @@ export const getFeaturedPosts = async () => {
 
     return result.posts;
 }
+
+export const getCategoryPost = async (slug) => {
+  const query = gql`
+    query GetCategoryPost($slug: String!) {
+      postsConnection(where: {categories_some: {slug: $slug}}) {
+        edges {
+          cursor
+          node {
+            author {
+              bio
+              name
+              id
+              photo {
+                url
+              }
+            }
+            createdAt
+            slug
+            title
+            excerpt
+            featuredImage {
+              url
+            }
+            categories {
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.postsConnection.edges;
+};

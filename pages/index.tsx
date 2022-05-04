@@ -3,7 +3,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Key } from 'react'
 
-import { Categories , PostCard , PostWidget, FeaturedPosts} from '../components'
+import { Categories , PostCard , PostWidget} from '../components'
+import { FeaturedPosts }from '../sections'
 
 import { getPosts } from '../services'
 
@@ -28,11 +29,11 @@ const Home: NextPage<{posts: any}> = ({ posts }) => {
 
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'> 
         <div className='lg:col-span-8 col-span-1'>
-          { posts.map((post: { node: any },index: Key | null | undefined) => <PostCard key={index} post={post.node}/> )}
+          { posts.map((post: { node: any },index: Key | null ) => <PostCard key={index} post={post.node}/> )}
         </div>
         <div className="lg:col-span-4 col-span-1"> 
           <div className="lg:sticky relative top-8">
-            <PostWidget />
+            <PostWidget categories={null} slug={null} />
             <Categories />
           </div>
         </div>
