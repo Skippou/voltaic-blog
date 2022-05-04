@@ -1,6 +1,6 @@
 import { graphql } from "graphql";
 import { request, gql } from "graphql-request";
-import { server } from "../config";
+
 
 const graphqlAPI = String(process.env.NEXT_PUBLIC_GRAPHQL_API); 
 
@@ -132,16 +132,16 @@ export const getCategories = async () => {
 }
 
 export const submitComment = async (obj) => {
-    const result = await fetch(`${server}/api/comments`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(obj)
-    });
+  const result = await fetch('/api/comments', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(obj),
+  });
 
-    return result.json();
-}
+  return result.json();
+};
 
 export const getComments = async (slug) => {
     const query = gql`
