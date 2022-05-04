@@ -26,6 +26,9 @@ jobs:
       run: npm ci
     - name: Build project
       run: npm run build
+      with: 
+        NEXT_PUBLIC_GRAPHQL_API: ${{ secrets.NEXT_PUBLIC_GRAPHQL_API }}
+        GRAPHCMS_TOKEN: ${{ secrets.GRAPHCMS_TOKEN }}
     - name: Export static files
       run: npm run export
     - name: Add .nojekyll file
