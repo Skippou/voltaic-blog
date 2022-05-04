@@ -7,16 +7,15 @@ on:
 jobs:
   env-setup-job:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_GRAPHQL_API: ${{ secrets.NEXT_PUBLIC_GRAPHQL_API }}
+      GRAPHCMS_TOKEN: ${{ secrets.GRAPHCMS_TOKEN }}
 
     strategy:
       matrix:
         node-version: [14.x]
 
     steps:
-    - name: Retrieve secret
-      env:
-        REACT_APP_APIKey: ${{ secrets.REACT_APP_APIKey }}
-        REACT_APP_APISecret: ${{ secrets.REACT_APP_APISecret }}
     - name: Get files
       uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -34,9 +33,9 @@ jobs:
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.1
       
-      with:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NEXT_PUBLIC_GRAPHQL_API: ${{ secrets.NEXT_PUBLIC_GRAPHQL_API }}
-      GRAPHCMS_TOKEN: ${{ secrets.GRAPHCMS_TOKEN }}
-      BRANCH: gh-pages
-      FOLDER: out
+    with:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    BRANCH: gh-pages
+    FOLDER: out
+
+
