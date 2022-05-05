@@ -1,7 +1,7 @@
 {
   "name": "voltaic-blog",
   "version": "1.0.0",
-  "homepage": "https://skippou.github.io/skippou",
+  "homepage": "https://skippou.github.io/voltagic-blog/",
   "private": true,
   "scripts": {
     "predeploy": "npm run build",
