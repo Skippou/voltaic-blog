@@ -1,7 +1,7 @@
 FROM node:17-alpine AS dependencies
 RUN apk add --no-cache libc6-compat
 WORKDIR /
-COPY package.json ./
+COPY package.json package-lock.json ./
 RUN npm ci --only=production
 
 # Rebuild the source code only when needed
@@ -25,6 +25,7 @@ COPY --from=builder /.next ./.next
 COPY --from=builder /node_modules ./node_modules
 COPY --from=builder /package.json ./package.json
 
-USER skippodippo
+USER nextjs
 EXPOSE 3000
-CMD ["npm", "start"]
+ENV PORT 3000
+CMD ["npm", "run" , "start"]
