@@ -21,3 +21,16 @@ pnpm create next-app -- --example with-tailwindcss with-tailwindcss-app
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+
+## How to build
+Build commands:
+npm run build
+docker build -t voltaic-blog .
+
+## How to run
+Run commands:
+npm run start
+
+docker run -p 3000:3000 voltaic-blog
+
