@@ -32,5 +32,5 @@ docker build -t voltaic-blog .
 Run commands:
 npm run start
 
-docker run -p 3000:3000 voltaic-blog
-
+How to deploy:
+-Commit and push changes to GitHub
