@@ -50,7 +50,7 @@ const PostDetail = ({ post }) => {
         <img
           src={post.featuredImage.url}
           alt={post.title}
-          className='object-scale-down h-full w-full rounded-t-lg'
+          className='object-cover h-full w-full rounded-t-lg'
         ></img>
       </div>
       <div className='px-4 lg:px-0'>
